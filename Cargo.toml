@@ -1,0 +1,17 @@
+[package]
+name = "barnacle"
+version = "0.1.0"
+edition = "2021"
+authors = ["Bert JW Regeer <xistence@0x58.com>"]
+license-file = "LICENSE"
+description = "A small tool to template a configuration file with environment variables before exec'ing into another binary"
+readme = "README.md"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0"
+clap = { version = "3.0.0-rc.7", features = ["derive", "env"] }
+minijinja = { version = "^0.8", features = ["source"] }
+thiserror = "1.0.30"
