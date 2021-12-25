@@ -3,7 +3,7 @@ name = "barnacle"
 version = "0.1.0"
 edition = "2021"
 authors = ["Bert JW Regeer <xistence@0x58.com>"]
-license-file = "LICENSE"
+license = "ISC"
 description = "A small tool to template a configuration file with environment variables before exec'ing into another binary"
 readme = "README.md"
 
