@@ -33,7 +33,9 @@ fn main() {
 
     let env = jinja_environment(&matches.template).unwrap();
     let env_vars = std::env::vars().collect::<BTreeMap<_, _>>();
-    let tmpl = env.get_template("config.j2").expect("Failed to get config jinja2 template");
+    let tmpl = env
+        .get_template("config.j2")
+        .expect("Failed to get config jinja2 template");
     let output = tmpl.render(context!(env => env_vars)).unwrap();
 
     fs::write(&matches.output, output).expect("Failed to write output file");
