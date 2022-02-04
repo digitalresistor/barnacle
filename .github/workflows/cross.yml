@@ -1,0 +1,62 @@
+on:
+    # Only on pushes to master or one of the release branches we build on push
+    push:
+      branches:
+        - main
+        - '**'
+      tags:
+        - '**'
+
+name: Cross Build
+
+jobs:
+  cross:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - aarch64-unknown-linux-musl
+          - armv7-unknown-linux-musleabihf
+          - i686-unknown-linux-musl
+          - x86_64-unknown-linux-musl
+    name: ${{ matrix.target }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: ${{ matrix.target }}
+          override: true
+      - uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: build
+          args: --release --target=${{ matrix.target }}
+      - name: Archive barnacle binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.target }}
+          path: |
+            target/${{ matrix.target }}/release/barnacle
+
+  combine:
+    runs-on: ubuntu-latest
+    needs: cross
+    name: Combines all artifacts
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: artifacts
+      - name: Move all artifacts
+        run: |
+          mkdir target
+          for path in $(cd artifacts; *); do
+            mv artifacts/${path}/target/* target/
+          done
+
+          ls -R target
+        shell: bash
