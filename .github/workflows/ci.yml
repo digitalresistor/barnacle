@@ -4,6 +4,7 @@ on:
       branches:
         - main
       tags:
+        - '**'
     # Build pull requests
     pull_request:
 
