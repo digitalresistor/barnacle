@@ -1,5 +1,5 @@
 use std::collections::BTreeMap;
-use std::path::PathBuf;
+use std::path::Path;
 use std::process::Command;
 use std::{fs, os::unix::process::CommandExt};
 
@@ -10,17 +10,17 @@ use minijinja::{context, Environment, Source};
 use barnacle::cli::Cli;
 use barnacle::error::Error;
 
-fn exec(command: &Vec<String>) {
+fn exec(command: &[String]) {
     let prog = &command[0];
     let args = &command[1..];
 
     Command::new(prog).args(args).exec();
 }
 
-fn jinja_environment(template_path: &PathBuf) -> Result<Environment> {
+fn jinja_environment(template_path: &Path) -> Result<Environment> {
     let mut env = Environment::new();
     let mut source = Source::new();
-    let input = fs::read_to_string(template_path).map_err(|err| Error::FileMissing(err))?;
+    let input = fs::read_to_string(template_path).map_err(Error::FileMissing)?;
 
     source.add_template("config.j2", input)?;
     env.set_source(source);
