@@ -44,7 +44,7 @@ jobs:
     name: Build Docker Containers
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           path: ci/docker/artifacts/
 
