@@ -13,5 +13,5 @@ readme = "README.md"
 [dependencies]
 anyhow = "1.0"
 clap = { version = "3.1", features = ["derive", "env"] }
-minijinja = { version = "^0.15", features = ["source", "json", "urlencode"] }
+minijinja = { version = "^0.22", features = ["source", "json", "urlencode"] }
 thiserror = "1.0"
