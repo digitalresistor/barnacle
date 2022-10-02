@@ -1,6 +1,6 @@
 [package]
 name = "barnacle"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 authors = ["Bert JW Regeer <xistence@0x58.com>"]
 license = "ISC"
