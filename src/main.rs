@@ -40,5 +40,11 @@ fn main() {
 
     fs::write(&matches.output, output).expect("Failed to write output file");
 
+    // If we have an exit code, use it
+    if let Some(exit) = matches.exit {
+        std::process::exit(exit.into());
+    }
+
+    // Otherwise we execute the command provided on the CLI
     exec(&matches.command);
 }
