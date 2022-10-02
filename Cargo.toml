@@ -1,6 +1,6 @@
 [package]
 name = "barnacle"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2021"
 authors = ["Bert JW Regeer <xistence@0x58.com>"]
 license = "ISC"
@@ -12,6 +12,6 @@ readme = "README.md"
 
 [dependencies]
 anyhow = "1.0"
-clap = { version = "3.1", features = ["derive", "env"] }
+clap = { version = "^4.0", features = ["derive", "env"] }
 minijinja = { version = "^0.23", features = ["source", "json", "urlencode"] }
 thiserror = "1.0"
